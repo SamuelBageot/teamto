@@ -9,13 +9,25 @@ type CharactersState = {
 
 const initialState: CharactersState = {
   characters: [],
-  isLoading: false
+  isLoading: false,
 };
 
 const slice = createSlice({
   name: "characters",
   initialState,
-  reducers: {},
+  reducers: {
+    getCharactersLoading(state) {
+      state.isLoading = true;
+    },
+    getCharactersSuccess(state, action) {
+      const characters = action.payload;
+      state.characters = characters;
+      state.isLoading = false;
+    },
+    getCharactersError(state) {
+      state.isLoading = false;
+    },
+  },
 });
 
 export const { reducer, actions } = slice;
