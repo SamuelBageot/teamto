@@ -4,11 +4,15 @@ import { Character } from "./types";
 type CharactersState = {
   characters: Character[];
   isLoading: boolean;
+  search: string;
+  details: {};
 };
 
 const initialState: CharactersState = {
   characters: [],
   isLoading: false,
+  details: {},
+  search: "",
 };
 
 const slice = createSlice({
@@ -24,6 +28,22 @@ const slice = createSlice({
       state.isLoading = false;
     },
     getCharactersError(state) {
+      state.isLoading = false;
+    },
+    setSearch(state, action) {
+      // Do nothing here
+    },
+    setSearchSuccess(state, action) {
+      state.search = action.payload;
+    },
+    getCharacterDetailsSuccess(state, action) {
+      state.details = action.payload;
+      state.isLoading = false;
+    },
+    getCharacterDetailsLoading(state) {
+      state.isLoading = true;
+    },
+    getCharacterDetailsError(state) {
       state.isLoading = false;
     },
   },

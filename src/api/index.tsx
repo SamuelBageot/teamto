@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 type requestAction = {
-  page?: string
+  page?: string;
+  id: string;
 }
 
 export function requestGetCharacters(params?: requestAction) {
@@ -11,3 +12,10 @@ export function requestGetCharacters(params?: requestAction) {
     params
   })
 }
+
+export function requestGetCharacterDetails(params?: requestAction) {
+    return axios.request({
+      method: 'GET',
+      url: `https://www.swapi.tech/api/people/${params?.id}`
+    })
+  }

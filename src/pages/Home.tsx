@@ -7,28 +7,43 @@ import { RootState } from "../redux/store";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { characters, isLoading } = useSelector((state: RootState) => state.characters);
+  const { characters, isLoading, search } = useSelector(
+    (state: RootState) => state.characters
+  );
+
+  const handleSetSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchValue = e.target.value;
+    dispatch(actions.characters.setSearchSuccess(searchValue));
+  };
 
   useEffect(() => {
     (async () => {
-      dispatch(actions.characters.getCharactersLoading());
+      dispatch(actions.characters.getCharactersLoading);
       try {
         const response = await requestGetCharacters();
-        if (response?.data.message !== 'ok') {
-            dispatch(actions.characters.getCharactersError());
+        console.log(response);
+        
+        if (response?.status !== 200) {
+          dispatch(actions.characters.getCharactersError);
         } else {
-            dispatch(actions.characters.getCharactersSuccess(response.data.results));
+          dispatch(
+            actions.characters.getCharactersSuccess(response.data.results)
+          );
         }
-      } catch(error) {
+      } catch (error) {
         console.error(error);
       }
     })();
   }, [dispatch]);
 
-  return <Characters
-    isLoading={isLoading}
-    characters={characters}
-  />
+  return (
+    <Characters
+      isLoading={isLoading}
+      characters={characters}
+      search={search}
+      handleSetSearch={handleSetSearch}
+    />
+  );
 };
 
 export default Home;

@@ -1,12 +1,14 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { Route, Router, Routes } from "react-router";
+import { BrowserRouter as Router, Route, RouteComponentProps, Switch } from 'react-router-dom'
 import Home from "./pages/Home";
 import "./index.css";
 import { createMemoryHistory } from "history";
 import { store } from "./redux/store";
 import { ChakraProvider } from '@chakra-ui/react'
+import CharacterPage from "./pages/Character";
+import Layout from "./components/Layout";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -15,11 +17,14 @@ const history = createMemoryHistory();
 root.render(
   <React.StrictMode>
     <ChakraProvider>
-      <Router location={""} navigator={history}>
+      <Router>
         <Provider store={store}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
+          <Switch>
+            <Layout>
+              <Route path="/" component={Home } exact />
+              <Route path="/:id" component={CharacterPage} />
+            </Layout>
+          </Switch>
         </Provider>
       </Router>
     </ChakraProvider>
