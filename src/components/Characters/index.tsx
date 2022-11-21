@@ -1,7 +1,17 @@
 import { ChangeEventHandler, FC } from "react";
-import { CircularProgress, Grid, Box, Input } from "@chakra-ui/react";
+import {
+  CircularProgress,
+  Grid,
+  Box,
+  Input,
+  Flex,
+  Alert,
+  AlertIcon,
+  Text,
+} from "@chakra-ui/react";
 import { Character } from "../../redux/characters/types";
 import CharacterCard from "./Character";
+import { getSingleDataID } from "../../utils";
 
 export type CharactersTemplateProps = {
   isLoading: Boolean;
@@ -10,29 +20,62 @@ export type CharactersTemplateProps = {
   handleSetSearch: ChangeEventHandler<HTMLInputElement>;
 };
 
-const Characters: FC<CharactersTemplateProps> = ({ isLoading, characters, search, handleSetSearch }) => {
-  return isLoading ? (
-    <CircularProgress />
-  ) : (
+const Characters: FC<CharactersTemplateProps> = ({
+  isLoading,
+  characters,
+  search,
+  handleSetSearch,
+}) => {
+  return (
     <Box>
-        <Input
-            type='text'
-            placeholder="Search for your favorite character"
-            onChange={handleSetSearch}
-        />
-        <Grid
-            templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)', xl: 'repeat(5, 1fr)' }}
-            gap={{ base: 5, sm: 5, lg: 10 }}
-            mt={5}
-        >
-        {characters?.map((character) => (
-            <CharacterCard
-                key={character.uid}
-                search={search}
-                { ...character }
-            />
-        ))}
-        </Grid>
+      <Input
+        type="text"
+        width={"100%"}
+        height="50px"
+        fontSize={"20px"}
+        placeholder="Search for your favorite character"
+        onChange={handleSetSearch}
+      />
+      <Flex
+        w={"1000px"}
+        minH={"600px"}
+        direction="column"
+        alignItems={"center"}
+        justifyContent="center"
+      >
+        {isLoading ? (
+          <Box>
+            <CircularProgress isIndeterminate color="#FFE81F" />
+          </Box>
+        ) : (
+          <Box>
+            {!characters.length ? (
+              <Box color={"white"}>
+                <Alert status="warning">
+                  <AlertIcon color={'#FFE81F'} w={25} mr={10} />
+                  <Text color={'#FFE81F'} fontSize={28}>No result match your search</Text>
+                </Alert>
+              </Box>
+            ) : (
+              <Grid templateColumns={"repeat(5, 1fr)"} gap="20px" mt={100}>
+                {
+                  characters?.map((character) => {
+                    const characterID = getSingleDataID(character.url);
+                    return (
+                      <CharacterCard
+                        key={characterID}
+                        characterID={characterID}
+                        search={search}
+                        {...character}
+                      />
+                    );
+                  })
+                }
+              </Grid>
+            )}
+          </Box>
+        )}
+      </Flex>
     </Box>
   );
 };

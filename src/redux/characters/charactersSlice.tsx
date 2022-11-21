@@ -1,11 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { getRangeNbs } from "../../utils";
 import { Character } from "./types";
 
 type CharactersState = {
   characters: Character[];
   isLoading: boolean;
   search: string;
-  details: {};
+  details: Character;
+  pagesRange?: number[];
+  activePage: string;
+  nbOfPages: number;
+  resultsLimit: string;
 };
 
 const initialState: CharactersState = {
@@ -13,6 +18,10 @@ const initialState: CharactersState = {
   isLoading: false,
   details: {},
   search: "",
+  pagesRange: [],
+  activePage: '1',
+  nbOfPages: 0,
+  resultsLimit: '10'
 };
 
 const slice = createSlice({
@@ -23,8 +32,10 @@ const slice = createSlice({
       state.isLoading = true;
     },
     getCharactersSuccess(state, action) {
-      const characters = action.payload;
+      const { results: characters, count } = action.payload;
       state.characters = characters;
+      state.pagesRange = getRangeNbs(1, Math.ceil(count/10));
+      state.nbOfPages = Math.ceil(count/10);
       state.isLoading = false;
     },
     getCharactersError(state) {
@@ -35,6 +46,7 @@ const slice = createSlice({
     },
     setSearchSuccess(state, action) {
       state.search = action.payload;
+      state.activePage = '1';
     },
     getCharacterDetailsSuccess(state, action) {
       state.details = action.payload;
@@ -46,6 +58,9 @@ const slice = createSlice({
     getCharacterDetailsError(state) {
       state.isLoading = false;
     },
+    setActivePage(state, action) {
+      state.activePage = action.payload;
+    }
   },
 });
 

@@ -1,0 +1,24 @@
+.Characters {
+min-height: 100vh;
+height: 100vh;
+width: 100vw;
+left: 0;
+overflow: hidden;
+background: #000;
+}
+
+.paginate {
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+
+.active {
+    background-color: yellow;
+}
+
+li {
+    margin-right: 15px;
+    margin-left: 15px;
+    cursor: pointer;
+}

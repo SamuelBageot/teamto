@@ -7,8 +7,8 @@ type Props = {
 
 const Layout = ({ children }: Props) => {
   return (
-    <Container maxW={"1500px"}>
-      <Header />
+    <Container>
+      {/* <Header /> */}
       <main
         style={{
           minHeight: "100vh"
