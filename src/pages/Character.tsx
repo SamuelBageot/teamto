@@ -167,7 +167,7 @@ const CharacterPage = () => {
                   justifyContent={"space-around"}
                 >
                   <Box>
-                    <Text>gender</Text>
+                    <Text>Gender</Text>
                     <Text textTransform={"capitalize"} fontWeight={600}>
                       {gender}
                     </Text>
