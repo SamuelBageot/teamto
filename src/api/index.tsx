@@ -23,7 +23,6 @@ export function requestGetCharacterDetails(params?: requestAction) {
 }
 
 export function requestSearchCharacters(params?: requestAction) {
-  console.log(params)
   return axios.request({
     method: "GET",
     url: `https://swapi.dev/api/people/?search=${params?.search}`,

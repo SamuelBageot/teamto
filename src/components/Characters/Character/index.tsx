@@ -27,18 +27,9 @@ const CharacterCard: FC<CharacterTemplateProps> = ({
 }) => {
   return (
     <NavLink to={`/characters/${characterID}`} style={{ color: 'black', textDecoration: 'none' }}>
-      <Card border="1px solid lightgrey" height='200px' bgColor='whitesmoke' width='180px'>
+      <Card border="3px solid #FFE81F" borderRadius={5} padding={5} height='200px' bgColor='whitesmoke' width='180px' display={'flex'} textAlign='center' justifyContent='center' alignItems={'center'}>
         <CardBody>
           <Flex direction="column" justifyContent="center" alignItems="center">
-            {/* <Image
-                h={{ sm: 100, md: 120, lg: 150 }}
-                w={{ sm: 100, md: 120, lg: 150 }}
-                mb={5}
-                borderRadius='full'
-                src="https://lumiere-a.akamaihd.net/v1/images/image_1760b382.jpeg?region=0,0,2048,878"
-                objectFit='cover'
-                alt="Green double couch with wooden legs"
-                /> */}
             <Stack>
               <Heading size="md">{name}</Heading>
             </Stack>

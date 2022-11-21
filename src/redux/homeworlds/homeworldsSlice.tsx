@@ -1,7 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getRangeNbs } from "../../utils";
+import { createSlice } from "@reduxjs/toolkit";
 import { Homeworld } from "./types";
-// import { Character } from "./types";
 
 type HomeworldsState = {
   homeworlds: Homeworld[];
@@ -33,17 +31,10 @@ const slice = createSlice({
       state.isLoading = true;
     },
     getHomeworldsSuccess(state, action) {
-      const { results: characters, count } = action.payload;
+      const { results: homeworlds } = action.payload;
     },
     getHomeworldsError(state) {
       state.isLoading = false;
-    },
-    setSearch(state, action) {
-      // Do nothing here
-    },
-    setSearchSuccess(state, action) {
-      state.search = action.payload;
-      state.activePage = '1';
     },
     getHomeworldDetailsSuccess(state, action) {
       state.details = action.payload;
@@ -54,9 +45,6 @@ const slice = createSlice({
     },
     getHomeworldDetailsError(state) {
       state.isLoading = false;
-    },
-    setActivePage(state, action) {
-      state.activePage = action.payload;
     }
   },
 });

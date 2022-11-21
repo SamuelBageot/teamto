@@ -3,16 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import {
   requestGetCharacterDetails,
-  requestGetCharacters,
   requestGetHomeworldDetails,
 } from "../api";
 import { actions } from "../redux";
 import { RootState } from "../redux/store";
 import {
   CircularProgress,
-  Grid,
   Box,
-  Input,
   Flex,
   Card,
   CardBody,
@@ -20,15 +17,13 @@ import {
   Stack,
   Text,
   Divider,
-  CardFooter,
-  Button,
-  ButtonGroup,
+  CardFooter
 } from "@chakra-ui/react";
-import CharactersLayout from "../components/Layout copy/CharactersLayout";
 import { getSingleDataID } from "../utils";
 import { motion } from "framer-motion";
 import { Link, NavLink } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import CharactersLayout from "../components/Layouts/CharactersLayout/CharactersLayout";
 
 type Params = {
   id: string;
@@ -49,7 +44,6 @@ const CharacterPage = () => {
       dispatch(actions.characters.getCharacterDetailsLoading());
       try {
         const response = await requestGetCharacterDetails({ id });
-        console.log(response);
         if (response?.status !== 200) {
           dispatch(actions.characters.getCharacterDetailsError());
         } else {
@@ -73,7 +67,6 @@ const CharacterPage = () => {
         dispatch(actions.homeworlds.getHomeworldDetailsLoading);
         try {
           const response = await requestGetHomeworldDetails({ id: planetID });
-          console.log(response);
           if (response?.status !== 200) {
             dispatch(actions.homeworlds.getHomeworldDetailsError);
           } else {
@@ -88,7 +81,6 @@ const CharacterPage = () => {
     }
   }, [dispatch, details?.homeworld]);
 
-  console.log(details);
   const { name, birth_year, gender, hair_color, height, mass, skin_color } =
     details;
 
@@ -140,6 +132,7 @@ const CharacterPage = () => {
                 </Flex>
               </NavLink>
               <Card
+                border="3px solid #FFE81F"
                 borderRadius={5}
                 bgColor={"white"}
                 width="500px"
@@ -191,14 +184,6 @@ const CharacterPage = () => {
                     <Text>Mass</Text>
                     <Text fontWeight={600}>{mass}</Text>
                   </Box>
-                  {/* <ButtonGroup spacing="2">
-                    <Button variant="solid" colorScheme="blue">
-                      Buy now
-                    </Button>
-                    <Button variant="ghost" colorScheme="blue">
-                      Add to cart
-                    </Button>
-                  </ButtonGroup> */}
                 </CardFooter>
               </Card>
             </Box>

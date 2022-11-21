@@ -1,5 +1,5 @@
 import AnimatedRoutes from './AnimatedRoutes';
-import Layout from './Layout';
+import Layout from './Layouts/Layout';
 
 const App = () => {
     return (

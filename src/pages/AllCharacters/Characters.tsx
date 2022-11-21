@@ -4,15 +4,15 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { requestGetCharacters, requestGetHomeworlds, requestSearchCharacters } from "../../api";
-import CharactersLayout from "../../components/Layout copy/CharactersLayout";
 import { actions } from "../../redux";
 import { RootState } from "../../redux/store";
 import { getRangeNbs } from "../../utils";
 import ReactPaginate from "react-paginate";
 import style from "./style.module.css";
 import Characters from "../../components/Characters";
+import CharactersLayout from "../../components/Layouts/CharactersLayout/CharactersLayout";
 
-const Planets = () => {
+const AllCharacters = () => {
   const location = useLocation();
   const prevPath = location.state?.from;
   console.log(location)
@@ -113,4 +113,4 @@ const Planets = () => {
   );
 };
 
-export default Planets;
+export default AllCharacters;

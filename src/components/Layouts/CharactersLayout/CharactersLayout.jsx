@@ -1,9 +1,7 @@
 import React from 'react';
 import style from './CharactersLayout.module.css';
 import { motion } from 'framer-motion';
-import Stars from '../Stars';
-import Overlay from '../Overlay';
-import { Link } from 'react-router-dom';
+import Stars from '../../Stars';
 
 const CharactersLayout = ({ children }) => {
     return (
