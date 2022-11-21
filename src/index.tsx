@@ -11,7 +11,6 @@ import App from "./components/App";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
-const history = createMemoryHistory();
 
 root.render(
   <React.StrictMode>

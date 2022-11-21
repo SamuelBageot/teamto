@@ -1,12 +1,11 @@
-import { Box, Button, Container, Flex, Input } from "@chakra-ui/react";
+import { Box, Container } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useLocation } from "react-router-dom";
-import { requestGetCharacters, requestGetHomeworlds, requestSearchCharacters } from "../../api";
+import { useLocation } from "react-router-dom";
+import { requestGetCharacters } from "../../api";
 import { actions } from "../../redux";
 import { RootState } from "../../redux/store";
-import { getRangeNbs } from "../../utils";
 import ReactPaginate from "react-paginate";
 import style from "./style.module.css";
 import Characters from "../../components/Characters";
@@ -15,7 +14,6 @@ import CharactersLayout from "../../components/Layouts/CharactersLayout/Characte
 const AllCharacters = () => {
   const location = useLocation();
   const prevPath = location.state?.from;
-  console.log(location)
   const dispatch = useDispatch();
 
   const handleSetActivePage = (e: any) => {
@@ -47,7 +45,6 @@ const AllCharacters = () => {
           page: activePage,
           search
         });
-        console.log(response);
         if (response?.status !== 200) {
           dispatch(actions.characters.getCharactersError());
         } else {
@@ -59,16 +56,11 @@ const AllCharacters = () => {
     })();
   }, [dispatch, activePage, search]);
 
-  console.log(characters);
-
-  useEffect(() => console.log(isLoading), [isLoading])
-
   return (
     <CharactersLayout>
       <motion.div
-        initial={{ opacity: prevPath !== '/' ? 1 : 0 }}
-        animate={{ opacity: 1, transition: { duration: prevPath !== '/' ? 3 : 0, delay: prevPath !== '/' ? 3 : 0 } }}
-        // exit={false}
+        initial={{ opacity: !prevPath ? 1 : 0 }}
+        animate={{ opacity: 1, transition: { duration: !prevPath ? 3 : 0, delay: !prevPath ? 3 : 0 } }}
         style={{
           height: "100vh",
           width: "100vw",
@@ -79,14 +71,13 @@ const AllCharacters = () => {
         }}
       >
         <motion.div
-          initial={{ opacity: prevPath !== '/' ? 1 : 0 }}
-          animate={{ opacity: 1, transition: { duration: 1.5, delay: prevPath !== '/' ? 4 : 0 } }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: !prevPath ? 1.5 : 0, delay: !prevPath ? 4 : 0 } }}
           // exit={false}
         >
           <Container
             className={style.paginate}
             height={"100%"}
-            // maxW='1500px'
             centerContent
           >
             <Characters

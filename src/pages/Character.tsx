@@ -21,7 +21,7 @@ import {
 } from "@chakra-ui/react";
 import { getSingleDataID } from "../utils";
 import { motion } from "framer-motion";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import CharactersLayout from "../components/Layouts/CharactersLayout/CharactersLayout";
 

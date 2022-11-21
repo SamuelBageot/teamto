@@ -1,6 +1,5 @@
 import {
   Card,
-  Image,
   Heading,
   CardBody,
   Stack,
@@ -19,11 +18,8 @@ export type CharacterTemplateProps = {
 };
 
 const CharacterCard: FC<CharacterTemplateProps> = ({
-  uid,
   name,
-  characterID,
-  url,
-  search,
+  characterID
 }) => {
   return (
     <NavLink to={`/characters/${characterID}`} style={{ color: 'black', textDecoration: 'none' }}>

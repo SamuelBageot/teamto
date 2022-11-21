@@ -29,7 +29,7 @@ const Home = () => {
                         animate={{ transform: 'translateY(0)', opacity: 1, transition: { duration: 2 } }}
                         exit={{ transform: 'translateY(-100vh)', opacity: 1, transition: { duration: 4 } }}
                     >
-                        <motion.h1 style={{ textAlign: 'center' }}>
+                        <motion.h1 style={{ textAlign: 'center', border: '3px solid #feda4a', padding: '10px 30px', borderRadius: '10px' }}>
                             <div className={style.title}>
                                 <span>STAR WARS</span>
                                 <span style={{ display: 'block' }}>CHARACTERS</span>
